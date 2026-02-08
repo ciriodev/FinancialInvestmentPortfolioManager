@@ -1,17 +1,33 @@
 package CarteraInversiones;
 
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
+
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Activo[] activos = new Activo[] {new Accion("Apple", 150, 5), new Cripto("Bitcoin", 40000, 1.2)};
-		double patrimonio = 0;
-		for (Activo activo : activos) {
-			System.out.println("Nombre: "+activo.nombre + "\n Valor: " + activo.calcularValorFinal());
-			patrimonio+=activo.calcularValorFinal();
+		GestorFicheros gestor = new GestorFicheros();
+
+		// 1. Cargamos lo que hubiera guardado
+		ArrayList<Activo> misActivos = gestor.cargar();
+
+		// 2. Si la lista está vacía, añadimos algo para probar
+		if (misActivos.isEmpty()) {
+			misActivos.add(new Accion("Google", 2500, 50));
+			misActivos.add(new Cripto("Ethereum", 2200, 1.15));
 		}
-		
-		System.out.println("Patrimonio Neto Total= " + (patrimonio - patrimonio*0.21) + "€");
+
+		// 3. Mostramos la cartera actual
+		double total = 0;
+		for (Activo a : misActivos) {
+			System.out.println(a.nombre + " - Valor final: " + a.calcularValorFinal());
+			total += a.calcularValorFinal();
+		}
+		System.out.println("Patrimonio Total: " + total);
+
+		// 4. Guardamos los cambios antes de salir
+		gestor.guardar(misActivos);
 	}
 
 }

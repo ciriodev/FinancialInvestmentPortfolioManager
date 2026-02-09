@@ -21,5 +21,7 @@ The system processes a list of `Activo` objects. Each subclass implements its ow
 - [ ] CSV/JSON file import/export functionality.
 - [ ] Graphical User Interface (GUI) or Web Dashboard.
 
+## 🆙 Updates
+* **Search engine** Implements a binary seach engine with `RandomAccessFile` and a manual pointer managment. 
 ---
 *Created as part of my "1 Million Goal" Dev Challenge.*

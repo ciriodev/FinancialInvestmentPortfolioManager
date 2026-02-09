@@ -22,6 +22,7 @@ The system processes a list of `Activo` objects. Each subclass implements its ow
 - [ ] Graphical User Interface (GUI) or Web Dashboard.
 
 ## 🆙 Updates
-* **Search engine** Implements a binary seach engine with `RandomAccessFile` and a manual pointer managment. 
+* **Search engine** Implements a binary search engine with `RandomAccessFile` and a manual pointer managment.
+* **Update prices** Implements a extra on the binary search engine for update the price when find the introduced name.
 ---
 *Created as part of my "1 Million Goal" Dev Challenge.*

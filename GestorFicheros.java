@@ -61,6 +61,7 @@ public class GestorFicheros {
     
     
     public void buscarArchivo(String nombre) {
+		nombre = nombre.trim();
     	RandomAccessFile rnd = null;
     	File f = new File("cartera.dat");
     	if (!f.exists()) {
@@ -91,4 +92,5 @@ public class GestorFicheros {
     	
     }
     
+
 }

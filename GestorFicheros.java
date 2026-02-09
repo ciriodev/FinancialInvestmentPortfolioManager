@@ -61,7 +61,7 @@ public class GestorFicheros {
     
     
     public void buscarArchivo(String nombre) {
-		nombre = nombre.trim();
+    	nombre = nombre.trim();
     	RandomAccessFile rnd = null;
     	File f = new File("cartera.dat");
     	if (!f.exists()) {
@@ -91,6 +91,30 @@ public class GestorFicheros {
     	
     	
     }
-    
+    public void actualizarPrecio(String nombreABuscar, double nuevoPrecio) {
+        File f = new File("cartera.dat");
+        if (!f.exists()) return;
 
+        try (RandomAccessFile rnd = new RandomAccessFile(f, "rw")) { // "rw" porque vamos a escribir
+            while (rnd.getFilePointer() < rnd.length()) {
+                long posicionInicioRegistro = rnd.getFilePointer();
+                String nombreLeido = rnd.readUTF();
+                
+                if (nombreLeido.equalsIgnoreCase(nombreABuscar)) {
+                    // ¡LO HEMOS ENCONTRADO! 
+                    // El puntero está justo donde empieza el Double del precio
+                    rnd.writeDouble(nuevoPrecio); 
+                    System.out.println("Precio actualizado con éxito.");
+                    return;
+                } else {
+                    // No es este, saltamos los 20 bytes para ir al siguiente
+                    rnd.seek(rnd.getFilePointer() + 20);
+                }
+            }
+            System.out.println("No se encontró el activo para actualizar.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }
